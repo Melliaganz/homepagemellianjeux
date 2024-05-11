@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     if (darkMode) {
-      document.body.style.backgroundColor = '#222';
+      document.body.style.backgroundColor = '#383838';
       document.body.style.color = '#fff';
     } else {
       document.body.style.backgroundColor = 'initial';
