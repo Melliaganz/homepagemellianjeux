@@ -1,0 +1,36 @@
+/* Homepage.css */
+
+.homepage {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .homepage h1 {
+    font-size: 2.5rem;
+  }
+  
+  .homepage p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .games-links {
+    margin-top: 30px;
+  }
+  
+  .games-links a {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin: 10px;
+    padding: 10px 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .games-links a:hover {
+    background-color: #333;
+    color: #fff;
+  }
+  
