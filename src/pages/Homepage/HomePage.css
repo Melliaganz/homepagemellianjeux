@@ -1,6 +1,9 @@
 /* Homepage.css */
 
 .homepage {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
     margin-top: 50px;
   }
@@ -19,7 +22,7 @@
   }
   
   .games-links a {
-    display: inline-block;
+    display: flex;
     font-size: 1.5rem;
     margin: 10px;
     padding: 10px 20px;

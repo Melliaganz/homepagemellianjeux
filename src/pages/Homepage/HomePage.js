@@ -1,11 +1,23 @@
-// Homepage.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './HomePage.css';
+import Modal from '../../components/Modal/Modal';
+import { ref, onValue } from 'firebase/database';
 
-const HomePage = () => {
+const HomePage = ({ database }) => {
   const [pseudo, setPseudo] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [gameRooms, setGameRooms] = useState([]);
+
+  useEffect(() => {
+    const gameRoomsRef = ref(database, 'gameRooms');
+    onValue(gameRoomsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setGameRooms(Object.values(data));
+      }
+    });
+  }, [database]);
 
   const handlePseudoChange = (e) => {
     setPseudo(e.target.value);
@@ -17,22 +29,28 @@ const HomePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (pseudo.trim() === '') {
+      setShowModal(true);
+    } else {
+      // Traitement pour rejoindre un salon de jeu avec le pseudo et l'avatar sélectionnés
+    }
   }
 
   return (
     <div className="homepage">
-      <h1>Bienvenue sur notre application de jeux</h1>
-      <p>Entrez un pseudo et choisissez un avatar pour commencer à jouer !</p>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Pseudo" value={pseudo} onChange={handlePseudoChange} />
-        <select value={avatar} onChange={handleAvatarChange}>
-          <option value="">Choisir un avatar</option>
-          <option value="avatar1">Avatar 1</option>
-          <option value="avatar2">Avatar 2</option>
-          {/* Ajoutez d'autres options d'avatar ici */}
-        </select>
-        <button type="submit">Commencer à jouer</button>
-      </form>
+      <h1>Bienvenue sur MellianJeux</h1>
+      <p>Entrez un pseudo pour commencer à jouer !</p>
+      <div className="game-rooms">
+        <h2>Salons de jeux disponibles</h2>
+        <ul>
+          {gameRooms.map(room => (
+            <li key={room.id}>
+              <p>Nom du salon : {room.name}</p>
+              <p>Nombre de joueurs : {room.players}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
